@@ -1,5 +1,7 @@
 using ServiceMarketplaceBLL.Interfaces;
 using ServiceMarketplaceBLL.Services;
+using ServiceMarketplaceDAL.Interfaces;
+using ServiceMarketplaceDAL.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

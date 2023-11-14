@@ -1,4 +1,5 @@
 ﻿using ServiceMarketplaceBLL.Interfaces;
+using ServiceMarketplaceDAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,15 @@ namespace ServiceMarketplaceBLL.Services
 {
     public class UserService : IUserService
     {
+        private readonly IUserRepository _userRepository;
+
+        public UserService (IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
         public string getUser()
         {
-            return "user user";
+            return _userRepository.getUser();
         }
     }
 }
