@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using ServiceMarketplaceBLL.Interfaces;
 using ServiceMarketplaceBLL.Services;
+using ServiceMarketplaceDAL;
 using ServiceMarketplaceDAL.Interfaces;
 using ServiceMarketplaceDAL.Repository;
 
@@ -13,7 +15,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+builder.Services.AddDbContext<DataContext>(options =>
+{   
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
