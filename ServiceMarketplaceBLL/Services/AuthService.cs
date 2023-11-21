@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace ServiceMarketplaceBLL.Services
 {
-    public class UserService : IUserService
+    public class AuthService : IUserService
     {
         private readonly IUserRepository _userRepository;
 
-        public UserService (IUserRepository userRepository)
+        public AuthService (IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
