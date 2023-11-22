@@ -1,4 +1,6 @@
-﻿using ServiceMarketplaceBLL.Interfaces;
+﻿using ServiceMarketplaceBLL.DTO;
+using ServiceMarketplaceBLL.Interfaces;
+using ServiceMarketplaceDAL.Entities;
 using ServiceMarketplaceDAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ServiceMarketplaceBLL.Services
 {
-    public class AuthService : IUserService
+    public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
 
@@ -16,9 +18,19 @@ namespace ServiceMarketplaceBLL.Services
         {
             _userRepository = userRepository;
         }
-        public string getUser()
+        public async Task<bool> register(NewUserDTO user)
         {
-            return _userRepository.getUser();
+            if (user.Username.Length<=3)
+            {
+                return false;
+            }
+            return await _userRepository.register(new User()
+            {
+                Username = user.Username,
+                FullName = user.FullName,
+                Email = user.Email, 
+                Password = user.Password
+            });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ServiceMarketplaceDAL.Interfaces;
+﻿using ServiceMarketplaceDAL.Entities;
+using ServiceMarketplaceDAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,23 @@ namespace ServiceMarketplaceDAL.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public string getUser()
+        DataContext _dataContext;
+        public UserRepository(DataContext dataContext)
         {
-            return "User DAL";
+            _dataContext = dataContext;
+        }
+
+        public async Task<bool> register(User user)
+        {
+            try
+            {
+                _dataContext.Users.Add(user);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex) { 
+                return false;
+            }
         }
     }
 }

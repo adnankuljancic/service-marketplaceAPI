@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServiceMarketplaceBLL.DTO;
 using ServiceMarketplaceBLL.Interfaces;
 
 namespace ServiceMarketplaceAPI.Controllers
@@ -8,17 +9,25 @@ namespace ServiceMarketplaceAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IAuthService _userService;
 
-        public AuthController(IUserService userService)
+        public AuthController(IAuthService userService)
         {
             _userService = userService;
         }
 
-        [HttpGet("register")]
-        public IActionResult Get()
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(NewUserDTO request)
         {
-            return Ok(_userService.getUser());
+            bool result = await _userService.register(request);
+            if(result)
+            {
+                return Ok("Registration successful!");
+            }
+            else
+            {
+                return BadRequest("Registration failed!");
+            }
         }
     }
 }

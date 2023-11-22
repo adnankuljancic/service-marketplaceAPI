@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceMarketplaceBLL.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ServiceMarketplaceBLL.Interfaces
 {
-    public interface IUserService
+    public interface IAuthService
     {
-        public string getUser();
+        public Task<bool> register(NewUserDTO user);
     }
 }
