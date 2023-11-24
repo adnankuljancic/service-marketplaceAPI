@@ -1,4 +1,5 @@
 ﻿using ServiceMarketplaceBLL.DTO;
+using ServiceMarketplaceDAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace ServiceMarketplaceBLL.Interfaces
 {
     public interface IAuthService
     {
-        public Task<bool> register(NewUserDTO user);
+        public Task<bool> Register(NewUserDTO user);
+        public Task<bool> Login(UserDTO user);
     }
 }

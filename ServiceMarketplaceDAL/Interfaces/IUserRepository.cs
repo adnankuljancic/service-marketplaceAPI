@@ -9,6 +9,8 @@ namespace ServiceMarketplaceDAL.Interfaces
 {
     public interface IUserRepository
     {
-        public Task<bool> register(User user);
+        public Task<bool> Register(User user);
+
+        public Task<User?> GetUserByEmail(string email);
     }
 }

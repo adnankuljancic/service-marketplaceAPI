@@ -19,7 +19,7 @@ namespace ServiceMarketplaceBLL.Services
         {
             _userRepository = userRepository;
         }
-        public async Task<bool> register(NewUserDTO user)
+        public async Task<bool> Register(NewUserDTO user)
         {
             CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -27,7 +27,8 @@ namespace ServiceMarketplaceBLL.Services
             {
                 return false;
             }
-            return await _userRepository.register(new User()
+
+            bool result = await _userRepository.Register(new User()
             {
                 Username = user.Username,
                 FullName = user.FullName,
@@ -35,7 +36,21 @@ namespace ServiceMarketplaceBLL.Services
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
 
-            }); 
+            });
+            return result;
+        }
+
+        public async Task<bool> Login(UserDTO user) 
+        {
+            User ?dbUser = await _userRepository.GetUserByEmail(user.Email);
+
+            if (dbUser != null && string.Equals(user.Email, dbUser.Email) && VerifyPasswordHash(user.Password, dbUser.PasswordHash, dbUser.PasswordSalt))
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -44,6 +59,15 @@ namespace ServiceMarketplaceBLL.Services
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
             }
         }
     }

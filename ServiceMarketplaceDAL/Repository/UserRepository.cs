@@ -1,4 +1,5 @@
-﻿using ServiceMarketplaceDAL.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ServiceMarketplaceDAL.Entities;
 using ServiceMarketplaceDAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace ServiceMarketplaceDAL.Repository
             _dataContext = dataContext;
         }
 
-        public async Task<bool> register(User user)
+        public async Task<bool> Register(User user)
         {
             try
             {
@@ -27,6 +28,11 @@ namespace ServiceMarketplaceDAL.Repository
             catch (Exception ex) { 
                 return false;
             }
+        }
+
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            return await _dataContext.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }
