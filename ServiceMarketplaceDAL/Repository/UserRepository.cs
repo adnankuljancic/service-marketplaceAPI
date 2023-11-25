@@ -17,6 +17,7 @@ namespace ServiceMarketplaceDAL.Repository
             _dataContext = dataContext;
         }
 
+        /// <inheritdoc/>
         public async Task<bool> Register(User user)
         {
             try
@@ -30,6 +31,7 @@ namespace ServiceMarketplaceDAL.Repository
             }
         }
 
+        /// <inheritdoc/>
         public async Task<User?> GetUserByEmail(string email)
         {
             return await _dataContext.Users.FirstOrDefaultAsync(u => u.Email == email);
