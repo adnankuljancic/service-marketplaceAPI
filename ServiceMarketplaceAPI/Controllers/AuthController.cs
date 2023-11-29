@@ -17,7 +17,7 @@ namespace ServiceMarketplaceAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(NewUserDTO request)
+        public async Task<ActionResult<string>> Register(NewUserDTO request)
         {
             bool result = await _userService.Register(request);
             if(result)
@@ -31,17 +31,9 @@ namespace ServiceMarketplaceAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserDTO request)
+        public async Task<ActionResult<string>> Login(UserDTO request)
         {
-            bool result = await _userService.Login(request);
-            if (result)
-            {
-                return Ok("Login successful!");
-            }
-            else
-            {
-                return BadRequest("Login failed!");
-            }
+            return await _userService.Login(request);
         }
     }
 }

@@ -11,6 +11,6 @@ namespace ServiceMarketplaceBLL.Interfaces
     public interface IAuthService
     {
         public Task<bool> Register(NewUserDTO user);
-        public Task<bool> Login(UserDTO user);
+        public Task<string> Login(UserDTO user);
     }
 }
