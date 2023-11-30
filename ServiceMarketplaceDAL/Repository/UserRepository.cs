@@ -26,7 +26,7 @@ namespace ServiceMarketplaceDAL.Repository
                 await _dataContext.SaveChangesAsync();
                 return true;
             }
-            catch (Exception ex) { 
+            catch (Exception ex) {
                 return false;
             }
         }

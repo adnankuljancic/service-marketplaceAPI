@@ -25,6 +25,8 @@ namespace ServiceMarketplaceBLL.Services
             _userRepository = userRepository;
             _configuration = configuration;
         }
+
+        /// <inheritdoc/>
         public async Task<bool> Register(NewUserDTO user)
         {
             CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -46,6 +48,7 @@ namespace ServiceMarketplaceBLL.Services
             return result;
         }
 
+        /// <inheritdoc/>
         public async Task<string> Login(UserDTO user) 
         {
             User ?dbUser = await _userRepository.GetUserByEmail(user.Email);
@@ -60,6 +63,12 @@ namespace ServiceMarketplaceBLL.Services
             }
         }
 
+        /// <summary>
+        /// Creates password hash
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="passwordHash"></param>
+        /// <param name="passwordSalt"></param>
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
@@ -69,6 +78,13 @@ namespace ServiceMarketplaceBLL.Services
             }
         }
 
+        /// <summary>
+        /// Verifies password
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="passwordHash"></param>
+        /// <param name="passwordSalt"></param>
+        /// <returns></returns>
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512(passwordSalt))
@@ -78,6 +94,11 @@ namespace ServiceMarketplaceBLL.Services
             }
         }
 
+        /// <summary>
+        /// Creates JWT token
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
