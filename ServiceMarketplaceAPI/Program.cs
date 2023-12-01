@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ServiceMarketplaceAPI.Middleware;
 using ServiceMarketplaceBLL.Interfaces;
 using ServiceMarketplaceBLL.Services;
 using ServiceMarketplaceDAL;
@@ -33,5 +34,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.Run();

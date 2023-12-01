@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ServiceMarketplaceBLL.DTO;
+using ServiceMarketplaceBLL.Exceptions;
 using ServiceMarketplaceBLL.Interfaces;
 using ServiceMarketplaceDAL.Entities;
 using ServiceMarketplaceDAL.Interfaces;
@@ -51,6 +52,10 @@ namespace ServiceMarketplaceBLL.Services
         /// <inheritdoc/>
         public async Task<string> Login(UserDTO user) 
         {
+            if(user.Password.Length<=3)
+            {
+                throw new BadRequestException("Password must be longer than 3 char");
+            }
             User ?dbUser = await _userRepository.GetUserByEmail(user.Email);
 
             if (dbUser != null && string.Equals(user.Email, dbUser.Email) && VerifyPasswordHash(user.Password, dbUser.PasswordHash, dbUser.PasswordSalt))
