@@ -31,10 +31,18 @@ namespace ServiceMarketplaceBLL.Services
         public async Task<bool> Register(NewUserDTO user)
         {
             CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
+            
+            if(string.IsNullOrEmpty(user.Username))
+            {
+                throw new BadRequestException("Username is required.");
+            }
             if (user.Username.Length<=3)
             {
-                return false;
+                throw new BadRequestException("Username must have at least 3 characters.");
+            }
+            if(user.Username.Length>50)
+            {
+                throw new BadRequestException("Username can not be longer than 50 characters.");
             }
 
             bool result = await _userRepository.Register(new User()
