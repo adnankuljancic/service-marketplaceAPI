@@ -12,6 +12,7 @@ namespace ServiceMarketplaceDAL
     {
         public DataContext(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
+        public DbSet<Service> Services { get; set; }
 
     }
 }
