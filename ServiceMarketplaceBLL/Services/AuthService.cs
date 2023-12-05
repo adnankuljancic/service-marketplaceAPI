@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ServiceMarketplaceBLL.DTO;
 using ServiceMarketplaceBLL.Exceptions;
@@ -20,11 +21,13 @@ namespace ServiceMarketplaceBLL.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public AuthService (IUserRepository userRepository, IConfiguration configuration)
+        public AuthService (IUserRepository userRepository, IConfiguration configuration, IMapper mapper)
         {
             _userRepository = userRepository;
             _configuration = configuration;
+            _mapper = mapper;
         }
 
         /// <inheritdoc/>
@@ -45,15 +48,7 @@ namespace ServiceMarketplaceBLL.Services
                 throw new BadRequestException("Username can not be longer than 50 characters.");
             }
 
-            bool result = await _userRepository.Register(new User()
-            {
-                Username = user.Username,
-                FullName = user.FullName,
-                Email = user.Email,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
-
-            });
+            bool result = await _userRepository.Register(_mapper.Map<User>(user));
             return result;
         }
 
