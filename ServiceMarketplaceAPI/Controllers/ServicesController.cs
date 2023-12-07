@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServiceMarketplaceBLL.DTO;
 using ServiceMarketplaceBLL.Interfaces;
 
@@ -16,7 +17,7 @@ namespace ServiceMarketplaceAPI.Controllers
             _serviceService = serviceService;
         }
 
-        [HttpGet("services")]
+        [HttpGet("services"), Authorize]
         public async Task<ActionResult<IEnumerable<ServiceDTO>>> GetServices()
         {
             return Ok(await _serviceService.getServices());
