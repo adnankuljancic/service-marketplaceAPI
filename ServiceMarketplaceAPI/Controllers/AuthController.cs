@@ -19,21 +19,14 @@ namespace ServiceMarketplaceAPI.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<string>> Register(NewUserDTO request)
         {
-            bool result = await _userService.Register(request);
-            if(result)
-            {
-                return Ok("Registration successful!");
-            }
-            else
-            {
-                return BadRequest("Registration failed!");
-            }
+            return Ok(await _userService.Register(request));
+
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserDTO request)
         {
-            return await _userService.Login(request);
+            return Ok(await _userService.Login(request));
         }
     }
 }

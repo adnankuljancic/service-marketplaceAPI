@@ -67,7 +67,7 @@ namespace ServiceMarketplaceBLL.Services
                 return jwt;
             } else
             {
-                return "error";
+                throw new UnauthorizedAccessException("Invalid email or password.");
             }
         }
 

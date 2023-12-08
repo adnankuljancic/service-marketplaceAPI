@@ -36,7 +36,13 @@ namespace ServiceMarketplaceAPI.Middleware
                 message = ex.Message;
                 status = HttpStatusCode.BadRequest;
                 stackTrace = ex.StackTrace;
-            } else
+            }
+            else if (exceptionType == typeof(UnauthorizedAccessException))
+            {
+                message = ex.Message;
+                status = HttpStatusCode.Unauthorized;
+            }
+            else
             {
                 status = HttpStatusCode.InternalServerError;
                 stackTrace = ex.StackTrace;
