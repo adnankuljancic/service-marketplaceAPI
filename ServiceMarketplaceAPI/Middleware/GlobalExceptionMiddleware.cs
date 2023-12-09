@@ -1,7 +1,6 @@
 ﻿using ServiceMarketplaceBLL.Exceptions;
 using System.Net;
 using System.Text.Json;
-using BadRequestException = ServiceMarketplaceBLL.Exceptions.BadRequestException;
 
 namespace ServiceMarketplaceAPI.Middleware
 {
@@ -41,6 +40,11 @@ namespace ServiceMarketplaceAPI.Middleware
             {
                 message = ex.Message;
                 status = HttpStatusCode.Unauthorized;
+            }
+            else if (exceptionType == typeof(NotFoundException))
+            {
+                message = ex.Message;
+                status = HttpStatusCode.NotFound;
             }
             else
             {
