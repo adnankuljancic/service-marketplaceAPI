@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace ServiceMarketplaceBLL.Interfaces
 {
-    public interface IServiceService
+    public interface IReviewService
     {
         /// <summary>
-        /// Method that gets all services
+        /// Method used for adding a review
         /// </summary>
+        /// <param name="review"></param>
         /// <returns></returns>
-        public Task<IEnumerable<ServiceDTO>> getServices();
+        public Task<bool> addReview(NewReviewDTO review);
     }
 }

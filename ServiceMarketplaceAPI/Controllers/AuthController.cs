@@ -17,7 +17,7 @@ namespace ServiceMarketplaceAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<string>> Register(NewUserDTO request)
+        public async Task<ActionResult<bool>> Register(NewUserDTO request)
         {
             return Ok(await _userService.Register(request));
 
