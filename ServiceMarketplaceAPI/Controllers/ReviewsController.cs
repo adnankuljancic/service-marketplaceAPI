@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ServiceMarketplaceBLL.DTO;
+using ServiceMarketplaceBLL.Interfaces;
 
 namespace ServiceMarketplaceAPI.Controllers
 {
@@ -8,10 +10,17 @@ namespace ServiceMarketplaceAPI.Controllers
     [ApiController]
     public class ReviewsController : ControllerBase
     {
-        [HttpPost("review"), Authorize]
-        public async Task<ActionResult<bool>> addReview()
-        {
+        private readonly IReviewService _reviewService;
 
+        public ReviewsController (IReviewService reviewService)
+        {
+            _reviewService = reviewService;
+        }
+
+        [HttpPost("review"), Authorize]
+        public async Task<ActionResult<bool>> addReview(NewReviewDTO review)
+        {
+            return Ok(await _reviewService.addReview(review));
         }
     }
 }
