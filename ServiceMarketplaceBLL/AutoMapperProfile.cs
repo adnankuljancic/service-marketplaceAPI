@@ -13,8 +13,10 @@ namespace ServiceMarketplaceBLL
     {
         public AutoMapperProfile() 
         {
-            CreateMap<NewUserDTO, User>().ReverseMap();
+            CreateMap<CreateUserDTO, User>().ReverseMap();
             CreateMap<Service, ServiceDTO>().ReverseMap();
+            CreateMap<Review, ReviewDTO >().ReverseMap();
+            CreateMap<CreateReviewDTO, Review>().ReverseMap();
         }
     }
 }

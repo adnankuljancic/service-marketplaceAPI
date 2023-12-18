@@ -17,8 +17,8 @@ namespace ServiceMarketplaceAPI.Controllers
             _reviewService = reviewService;
         }
 
-        [HttpPost("review"), Authorize]
-        public async Task<ActionResult<bool>> addReview(NewReviewDTO review)
+        [HttpPost("review")]
+        public async Task<ActionResult<bool>> addReview(CreateReviewDTO review)
         {
             return Ok(await _reviewService.addReview(review));
         }

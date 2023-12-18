@@ -14,6 +14,6 @@ namespace ServiceMarketplaceBLL.Interfaces
         /// </summary>
         /// <param name="review"></param>
         /// <returns></returns>
-        public Task<bool> addReview(NewReviewDTO review);
+        public Task<ReviewDTO> addReview(CreateReviewDTO review);
     }
 }

@@ -22,4 +22,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="API\" />
+    <Folder Include="DAL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceMarketplaceBLL\ServiceMarketplaceBLL.csproj" />
+  </ItemGroup>
+
 </Project>

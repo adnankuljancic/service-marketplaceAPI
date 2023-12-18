@@ -15,7 +15,7 @@ namespace ServiceMarketplaceBLL.Interfaces
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public Task<bool> Register(NewUserDTO user);
+        public Task<bool> Register(CreateUserDTO user);
 
         /// <summary>
         /// Login method

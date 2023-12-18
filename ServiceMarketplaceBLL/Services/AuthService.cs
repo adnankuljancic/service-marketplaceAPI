@@ -31,7 +31,7 @@ namespace ServiceMarketplaceBLL.Services
         }
 
         /// <inheritdoc/>
-        public async Task<bool> Register(NewUserDTO user)
+        public async Task<bool> Register(CreateUserDTO user)
         {
             CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
             

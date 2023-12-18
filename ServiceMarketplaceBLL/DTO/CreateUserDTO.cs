@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServiceMarketplaceBLL.DTO
 {
-    public class NewUserDTO
+    public class CreateUserDTO
     {
         public string Username { get; set; } = "";
         public string FullName { get; set; } = "";
