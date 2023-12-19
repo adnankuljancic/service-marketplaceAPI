@@ -11,6 +11,8 @@ namespace ServiceMarketplaceBLL.DTO
         public string ReviewContent { get; set; } = "";
         public int Rating { get; set; }
         public int ServiceId { get; set; }
+        public int UserId {  get; set; }
+
 
     }
 }
