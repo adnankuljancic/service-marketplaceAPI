@@ -9,6 +9,10 @@ namespace ServiceMarketplaceDAL.Interfaces
 {
     public interface IServiceRepository
     {
+        /// <summary>
+        /// Returns all services
+        /// </summary>
+        /// <returns></returns>
         public Task<IEnumerable<Service>> getServices();
     }
 }

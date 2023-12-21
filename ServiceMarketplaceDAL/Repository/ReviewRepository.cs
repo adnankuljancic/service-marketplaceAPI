@@ -16,6 +16,8 @@ namespace ServiceMarketplaceDAL.Repository
         {
             _dataContext = dataContext;
         }
+
+        /// <inheritdoc/>
         public async Task<Review> AddReview(Review review)
         {
             await _dataContext.Reviews.AddAsync(review);

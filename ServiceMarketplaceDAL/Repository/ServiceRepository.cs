@@ -18,6 +18,7 @@ namespace ServiceMarketplaceDAL.Repository
             _dataContext = dataContext;
         }
 
+        /// <inheritdoc/>
         public async Task<IEnumerable<Service>> getServices()
         {
             return await _dataContext.Services.ToListAsync();

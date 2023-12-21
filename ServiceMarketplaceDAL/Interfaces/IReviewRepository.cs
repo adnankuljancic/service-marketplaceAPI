@@ -9,6 +9,11 @@ namespace ServiceMarketplaceDAL.Interfaces
 {
     public interface IReviewRepository
     {
+        /// <summary>
+        /// Adds review to db
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
         public Task<Review> AddReview(Review review);
     }
 }
