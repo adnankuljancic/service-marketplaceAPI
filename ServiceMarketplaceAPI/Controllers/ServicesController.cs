@@ -17,7 +17,7 @@ namespace ServiceMarketplaceAPI.Controllers
             _serviceService = serviceService;
         }
 
-        [HttpGet("services"), Authorize]
+        [HttpGet("services")]
         public async Task<ActionResult<IEnumerable<ServiceDTO>>> GetServices()
         {
             return Ok(await _serviceService.getServices());
